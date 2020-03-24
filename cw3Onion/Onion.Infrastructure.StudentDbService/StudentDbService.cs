@@ -1,17 +1,16 @@
-﻿using ActualDbService.Context;
-using Onion.Domain.Entities;
+﻿using Onion.Domain.Entities;
 using Onion.Domain.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Onion.ActualDbService.Services
+namespace Onion.Infrastructure.StudentDbService
 {
-    public class ActualDbService : IStudentDbService
+    public class StudentDbService : IStudentDbService
     {
-        private ActualDbContext _context = new ActualDbContext();
-        public ActualDbService()
+        private StudentDbContext _context = new StudentDbContext();
+        public StudentDbService()
         {
 
         }
