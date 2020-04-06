@@ -1,9 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Library.Models.DTO;
 using Library.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Rollbar;
 
 namespace Library.Controllers
 {
@@ -24,6 +26,7 @@ namespace Library.Controllers
         [HttpPost(Name = nameof(AddBookBorrow))]
         public async Task<IActionResult> AddBookBorrow([FromBody] BookBorrowDto borrow)
         {
+            _logger.LogError("Wystąpił błąd");
             var res = await _bookBorrowRepository.AddBookBorrow(borrow);
             return CreatedAtRoute(nameof(AddBookBorrow), res);
         }
@@ -31,6 +34,7 @@ namespace Library.Controllers
         [HttpPut("{idBookBorrow}")]
         public async Task<IActionResult> UpdateBookBorrow([FromBody] UpdateBookBorrowDto borrow)
         {
+            RollbarLocator.RollbarInstance.Error(new Exception("Błąd z Rollbar"));
             await _bookBorrowRepository.ChangeBookBorrow(borrow);
             return NoContent();
         }
