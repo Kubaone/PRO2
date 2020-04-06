@@ -3,6 +3,7 @@ using Library.Models.DTO;
 using Library.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Library.Controllers
 {
@@ -11,9 +12,11 @@ namespace Library.Controllers
     public class BookBorrowsController : Controller
     {
         private readonly IBookBorrowRepository _bookBorrowRepository;
+        private readonly ILogger<BookBorrowsController> _logger;
 
-        public BookBorrowsController(IBookBorrowRepository bookBorrowRepository)
+        public BookBorrowsController(IBookBorrowRepository bookBorrowRepository, ILogger<BookBorrowsController> logger)
         {
+            _logger = logger;
             _bookBorrowRepository = bookBorrowRepository;
         }
 
